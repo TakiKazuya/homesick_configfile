@@ -38,9 +38,9 @@ function rprompt-git-current-branch {
  
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
- 
+
 # プロンプトの右側にブランチのステータスに応じて色付き表示させる
-RPROMPT='`rprompt-git-current-branch`'
+RPROMPT='`rprompt-git-current-branch`' 
 
 # 入力途中の履歴補完を有効化する
 autoload history-search-end
@@ -72,7 +72,6 @@ export DOCKER_CONTENT_TRUST=1
 
 # oh-my-zsh のインストール
 export ZSH="/Users/kokubukazuya/.oh-my-zsh"
-source $ZSH/oh-my-zsh.sh
 
 # 自動サジェストとシンタックスハイライト
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -171,6 +170,28 @@ plugins=(git)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# 同時に起動した zsh の間でヒストリを共有する
+setopt share_history
+
+# 直前と同じコマンドの場合はヒストリに追加しない
+setopt hist_ignore_dups
+
+# 同じコマンドをヒストリに残さない
+setopt hist_ignore_all_dups
+
+# スペースから始まるコマンド行はヒストリに残さない
+setopt hist_ignore_space
+ 
+# ヒストリに保存するときに余分なスペースを削除する
+setopt hist_reduce_blanks
+
+# コマンドのスペルを訂正する
+setopt correct
+
+# oh-my-zshの設定
+source $ZSH/oh-my-zsh.sh
+
 eval "$(anyenv init -)"
 eval "$(nodenv init -)"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
